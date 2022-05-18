@@ -1,4 +1,4 @@
-import {AddRecord} from "../records/add.record";
+import {AdRecord} from "../records/ad.record";
 
 const defaultObj = {
     name: 'Test Name',
@@ -10,13 +10,13 @@ const defaultObj = {
 }
 
 test('Can build AdRecord', () => {
-    const ad = new AddRecord(defaultObj);
+    const ad = new AdRecord(defaultObj);
     expect(ad.name).toBe('Test Name');
     expect(ad.description).toBe('blah');
 })
 
 test('Validates invalid price', () => {
-   expect (() =>  new AddRecord({
+   expect (() =>  new AdRecord({
         ...defaultObj,
         price: -3,
     })).toThrow('Cena nie może być mniejsza niż 0 lub większa niż 9 999 999');
