@@ -2,7 +2,7 @@ import {AdEntity, SimpleAdEntity} from "../types";
 import {ValidationError} from "../utils/error";
 import {FieldPacket} from "mysql2";
 import {pool} from "../utils/db";
-
+import {v4 as uuid} from 'uuid';
 //Omit pozwala ominąć dany typ
 
 
@@ -64,4 +64,15 @@ export class AdRecord implements AdEntity {
             return {id,lat,lon};
         })
     }
+
+    async insert(): Promise<void> {
+        if(!this.id){
+            this.id = uuid();
+        }else{
+            throw new Error('Cannot insert something that is already inserted!')
+        }
+
+        await pool.execute("INSERT INTO `ads` (`id`, `name`, `description`, `price`, `url`, `lat`, `lon`) VALUES(:id, :name, :description, :price, :url, :lat, :lon)", this)
+    }
 }
+
