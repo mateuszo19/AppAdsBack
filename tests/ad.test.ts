@@ -53,7 +53,7 @@ test('AdRecord.findAll returns small amount of data', async () => {
 })
 
 test('AdRecord.findAll insert new data and returns UUID', async () => {
-    const ads = new AdRecord(defaultObj);
+    const ad = new AdRecord(defaultObj);
 
     await ad.insert();
 
