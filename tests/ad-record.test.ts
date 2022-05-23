@@ -1,4 +1,5 @@
 import {AdRecord} from "../records/ad.record";
+import {pool} from "../utils/db";
 
 const defaultObj = {
     name: 'Test Name',
@@ -8,6 +9,10 @@ const defaultObj = {
     lat: 9,
     lon: 9
 }
+
+afterAll(async () => {
+    await pool.end();
+});
 
 test('Can build AdRecord', () => {
     const ad = new AdRecord(defaultObj);
